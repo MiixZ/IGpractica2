@@ -346,10 +346,10 @@ _rotacion::_rotacion()
 
 void _rotacion::parametros(vector<_vertex3f> perfil, int num, int tipo, int tapa_in, int tapa_sup)
 {
-int i,j;
-_vertex3f vertice_aux;
-_vertex3i cara_aux;
-int num_aux;        // TAMAÑO DEL PERFIL.
+    int i,j;
+    _vertex3f vertice_aux;
+    _vertex3i cara_aux;
+    int num_aux;        // TAMAÑO DEL PERFIL.
 
 // tratamiento de los vértices
 
@@ -527,3 +527,41 @@ void _rotacion_PLY::parametros_PLY(char *archivo, int num){
     parametros(perfil, num, 0, 1, 1);
 }
 
+
+/////////////////////////////////////////////////////////////////
+//                          COCHE                              //
+/////////////////////////////////////////////////////////////////
+
+_coche::_coche(){
+    giro_puerta1 = 1.0;
+    giro_puerta2 = 1.0;
+    giro_puerta3 = 1.0;
+    giro_puerta4 = 1.0;
+}
+
+_coche::draw(_modo modo, float r, float g, float b, float grosor){
+
+    glPushMatrix();
+
+    sustentacion.draw(modo, r, g, b, grosor);
+
+    glTranslatef(0,(cabina.alto+sustentacion.alto)/2.0,0);
+    glRotatef(giro_cabina,0,1,0);
+    cabina.draw(modo, r, g, b, grosor);
+
+    glTranslatef(cabina.ancho/2.0,0,0);
+    glRotatef(giro_segundo_brazo,0,0,1);
+    brazo.draw(modo, r, g, b, grosor);
+
+    glTranslatef(brazo.ancho,0,0);
+    glRotatef(giro_primer_brazo,0,0,1);
+    brazo.draw(modo, r, g, b, grosor);
+
+    glTranslatef(brazo.ancho,0,0);
+    glRotatef(giro_pala,0,0,1);
+    glTranslatef(tamanio_pala,0,0);
+    glScalef(tamanio_pala, tamanio_pala, tamanio_pala);
+    pala.draw(modo, r, g, b, grosor);
+
+    glPopMatrix();
+}
