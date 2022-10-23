@@ -44,7 +44,6 @@ public:
     void 	colors_random();
     void 	colors_chess(float r1, float g1, float b1, float r2, float g2, float b2);
 
-
     vector<_vertex3i> caras;
     vector<_vertex3f> colores_caras;
 };
@@ -200,7 +199,7 @@ protected:
 class _sustentacion: public _triangulos3D
 {
 public:
-      _sustentacion();
+    _sustentacion();
     void  draw(_modo modo, float r, float g, float b, float grosor);
         
     float ancho;
@@ -274,9 +273,7 @@ protected:
     _cubo cubo;
 };
 
-
-class _puerta: public _triangulos3D
-{
+class _puerta: public _triangulos3D{
 public:
     _puerta();
     void  draw(_modo modo, float r, float g, float b, float grosor);
@@ -290,14 +287,23 @@ protected:
 };
 
 class _ruedas: public _triangulos3D{
-    public:
+public:
     _ruedas();
 
+    float ancho;
+    float alto;
+    float fondo;
+
+    float radio;
+
     void draw(_modo modo, float r, float g, float b, float grosor);
+
+protected:
+    _cilindro rueda1, rueda2, rueda3, rueda4;
 };
 
 class _sustentacioncoche: public _triangulos3D {
-    public:
+public:
     _sustentacioncoche();
     void  draw(_modo modo, float r, float g, float b, float grosor);
     
@@ -313,8 +319,8 @@ class _sustentacioncoche: public _triangulos3D {
     float getRadio();
 
 protected:
-    _cilindro rueda;
     _cubo base;
+    // _cilindro techo1, techo2;
 };
 
 class _coche: public _triangulos3D {
@@ -331,9 +337,7 @@ public:
     float GIRO_MAXIMO_PUERTAS = 90;
     
 protected:
-    _cabinacoche cabina;
-    _capo capo;
     _sustentacioncoche sustentacion;
-    _ruedas ruedas_delanteras, ruedas_traseras;
-    _puerta puerta1, puerta2, puerta3, puerta4;
+    _ruedas ruedas;
+    //_puerta puerta1, puerta2, puerta3, puerta4;
 };
