@@ -559,8 +559,7 @@ void _rotacion_PLY::parametros_PLY(char *archivo, int num){
 // pala
 //************************************************************************
 
-_pala::_pala(float radio, float ancho, int num)
-{
+_pala::_pala(float radio, float ancho, int num){
     vector<_vertex3f> perfil;
     _vertex3f vertice_aux;
     _vertex3i cara_aux;
@@ -780,34 +779,34 @@ _sustentacioncoche::_sustentacioncoche(){
 void _ruedas::draw(_modo modo, float r, float g, float b, float grosor){
     
     glPushMatrix();                                         // Rueda alante izquierda. (Rueda)
-    glTranslatef(2*ancho/5,-0.15,fondo/2);                  // Posición    
+    glTranslatef(2*ancho/5,0,fondo/2);                  // Posición    
     glRotatef(90,1,0,0);
     glScalef(radio, fondo/2.2, radio);                      // Tamaño
     rueda1.draw(modo, r, g, b, grosor);
     glPopMatrix();
     
-    glPushMatrix();                                         // Rueda atrás izquierda. (Rueda)
-    glTranslatef(-2*ancho/5,-0.15,fondo/2);
+    glPushMatrix();                                         // Rueda atrás derecha. (Rueda)
+    glTranslatef(-2*ancho/5,0,fondo/2 + 0.6);
     glRotatef(90,1,0,0);
     glScalef(radio, fondo/2.2, radio);
     rueda2.draw(modo, r, g, b, grosor);
     glPopMatrix();
 
     glPushMatrix();                                         // Rueda alante derecha. (Rueda)
-    glTranslatef(2*ancho/5,-0.15,-fondo/2);                 // Posición    
+    glTranslatef(2*ancho/5,0,-fondo/2);                 // Posición    
     glRotatef(90,1,0,0);
     glScalef(radio, fondo/2.2, radio);                      // Tamaño
     rueda3.draw(modo, r, g, b, grosor);
     glPopMatrix();
     
-    glPushMatrix();                                         // Rueda atrás derecha. (Rueda)
-    glTranslatef(-2*ancho/5,-0.15,-fondo/2);
+    glPushMatrix();                                         // Rueda atrás izquierda. (Rueda)
+    glTranslatef(-2*ancho/5,0,-fondo/2 - 0.6);
     glRotatef(90,1,0,0);
     glScalef(radio, fondo/2.2, radio);
     rueda4.draw(modo, r, g, b, grosor);
     glPopMatrix();
 
-
+//CILINDROS CABINA
 
     glPushMatrix();                                         // Cilindro 1 techo.
     glTranslatef(-2*ancho/9.305,alto,fondo/2);
@@ -822,21 +821,34 @@ void _ruedas::draw(_modo modo, float r, float g, float b, float grosor){
     glScalef(radio, ancho*1.5, radio);
     rueda4.draw(modo, r, g, b, grosor);
     glPopMatrix();
+
+//CILINDROS CAPÓ
+
+    glPushMatrix();                                         // Cilindro 1 capó.
+    glTranslatef(2*ancho/7,alto-0.6,fondo/2 - 0.3);
+    glRotatef(90,0,0,1);
+    glScalef(radio/2, ancho, radio/2);
+    rueda4.draw(modo, r, g, b, grosor);
+    glPopMatrix();
+
+    glPushMatrix();                                         // Cilindro 2 capó.
+    glTranslatef(2*ancho/7,alto-0.6,-fondo/2 + 0.3);
+    glRotatef(90,0,0,1);
+    glScalef(radio/2, ancho, radio/2);
+    rueda4.draw(modo, r, g, b, grosor);
+    glPopMatrix();
+
 }
 
 void _sustentacioncoche::draw(_modo modo, float r, float g, float b, float grosor){
     
+//CABINA
+
     glPushMatrix();                                         // Cabina
     glTranslatef(-2*ancho/7,0,0);
     glScalef(ancho, alto, fondo);
     base.draw(modo, r, g, b, grosor);
     glPopMatrix();
-
-    // glPushMatrix();                                         // Cabina
-    // glTranslatef(-2*ancho/7,0,0);
-    // glScalef(ancho, alto, fondo + 1.2);
-    // base.draw(modo, r, g, b, grosor);
-    // glPopMatrix();
 
     glPushMatrix();                                         // Cabina
     glTranslatef(-2*ancho/7,alto,0);
@@ -855,6 +867,33 @@ void _sustentacioncoche::draw(_modo modo, float r, float g, float b, float groso
     glScalef(ancho, alto, 0.6);
     base.draw(modo, r, g, b, grosor);
     glPopMatrix();
+
+//CAPÓ
+
+    glPushMatrix();                                         // Capó
+    glTranslatef(2*ancho/7 + 0.55,0,0);
+    glScalef(ancho/2, alto - 0.6, fondo -0.6);
+    base.draw(modo, r, g, b, grosor);
+    glPopMatrix();
+
+    glPushMatrix();                                         // Capó
+    glTranslatef(2*ancho/7 + 0.55,0,fondo - 1.15);
+    glScalef(ancho/2, alto - 0.6, 0.3);
+    base.draw(modo, r, g, b, grosor);
+    glPopMatrix();
+
+    glPushMatrix();                                         // Capó
+    glTranslatef(2*ancho/7 + 0.55,0, -fondo + 1.15);
+    glScalef(ancho/2, alto - 0.6, 0.3);
+    base.draw(modo, r, g, b, grosor);
+    glPopMatrix();
+
+    glPushMatrix();                                         // Capó
+    glTranslatef(2*ancho/7 + 0.55,alto - 0.6, 0);
+    glScalef(ancho/2, 0.3, fondo -0.6);
+    base.draw(modo, r, g, b, grosor);
+    glPopMatrix();
+    
 }
 
 void _coche::draw(_modo modo, float r, float g, float b, float grosor){
