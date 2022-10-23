@@ -289,6 +289,13 @@ protected:
     _cubo cubo;
 };
 
+class _ruedas: public _triangulos3D{
+    public:
+    _ruedas();
+
+    void draw(_modo modo, float r, float g, float b, float grosor);
+};
+
 class _sustentacioncoche: public _triangulos3D {
     public:
     _sustentacioncoche();
@@ -327,5 +334,6 @@ protected:
     _cabinacoche cabina;
     _capo capo;
     _sustentacioncoche sustentacion;
+    _ruedas ruedas_delanteras, ruedas_traseras;
     _puerta puerta1, puerta2, puerta3, puerta4;
 };
