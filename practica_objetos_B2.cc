@@ -223,7 +223,7 @@ switch (Tecla1){
         case GLUT_KEY_F10:Observer_distance*=1.2;break;             // Cambiado por teclado.
         case GLUT_KEY_F11:Observer_distance/=1.2;break;
             
-        case GLUT_KEY_F1:excavadora.giro_cabina+=5;break;
+        case GLUT_KEY_F1:coche.giro_puerta1+=5;break;
         case GLUT_KEY_F2:excavadora.giro_cabina-=5;break;
         case GLUT_KEY_F3:excavadora.giro_primer_brazo+=1;
                 if (excavadora.giro_primer_brazo > excavadora.giro_primer_brazo_max)

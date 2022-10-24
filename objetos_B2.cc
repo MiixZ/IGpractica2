@@ -894,6 +894,26 @@ void _sustentacioncoche::draw(_modo modo, float r, float g, float b, float groso
     base.draw(modo, r, g, b, grosor);
     glPopMatrix();
     
+//PUERTAS
+
+    glPushMatrix();                                         // Puerta derecha
+    glTranslatef(ancho/7 - 0.6,alto/6, fondo - 0.4);
+    glScalef(ancho/4, alto - 0.6, 0.05);
+    base.draw(modo, r, g, b, grosor);
+    glPopMatrix();
+
+    glPushMatrix();                                         // Puerta izquierda
+    glTranslatef(ancho/7 - 0.6,alto/6, -fondo + 0.4);
+    glScalef(ancho/4, alto - 0.6, 0.05);
+    base.draw(modo, r, g, b, grosor);
+    glPopMatrix();
+
+    glPushMatrix();                                         // Puerta izquierda
+    glTranslatef(-ancho + 0.6,alto/6, 0);
+    glScalef(0.05, alto - 0.6, fondo/2);
+    base.draw(modo, r, g, b, grosor);
+    glPopMatrix();
+
 }
 
 void _coche::draw(_modo modo, float r, float g, float b, float grosor){
@@ -901,6 +921,8 @@ void _coche::draw(_modo modo, float r, float g, float b, float grosor){
     glPushMatrix();
     
     sustentacion.draw(modo, r, g, b, grosor);
+
+    glRotatef(giro_puerta1,0,0,1);
 
     ruedas.draw(modo, r, g, b, grosor);
 
