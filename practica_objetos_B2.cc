@@ -223,26 +223,34 @@ switch (Tecla1){
         case GLUT_KEY_F10:Observer_distance*=1.2;break;             // Cambiado por teclado.
         case GLUT_KEY_F11:Observer_distance/=1.2;break;
             
-        case GLUT_KEY_F1:coche.giro_puerta1+=5;break;
-        case GLUT_KEY_F2:excavadora.giro_cabina-=5;break;
-        case GLUT_KEY_F3:excavadora.giro_primer_brazo+=1;
-                if (excavadora.giro_primer_brazo > excavadora.giro_primer_brazo_max)
-                    excavadora.giro_primer_brazo = excavadora.giro_primer_brazo_max;break;
-        case GLUT_KEY_F4:excavadora.giro_primer_brazo-=1;
-                if (excavadora.giro_primer_brazo < excavadora.giro_primer_brazo_min)
-                    excavadora.giro_primer_brazo = excavadora.giro_primer_brazo_min;break;
-        case GLUT_KEY_F5:excavadora.giro_segundo_brazo+=1;
-                if (excavadora.giro_segundo_brazo > excavadora.giro_segundo_brazo_max)
-                    excavadora.giro_segundo_brazo = excavadora.giro_segundo_brazo_max;break;
-        case GLUT_KEY_F6:excavadora.giro_segundo_brazo-=1;
-                if (excavadora.giro_segundo_brazo < excavadora.giro_segundo_brazo_min) 
-                    excavadora.giro_segundo_brazo = excavadora.giro_segundo_brazo_min;break;
-        case GLUT_KEY_F7:excavadora.giro_pala+=1;
-                if (excavadora.giro_pala > excavadora.giro_pala_max)
-                    excavadora.giro_pala = excavadora.giro_pala_max;break;
-        case GLUT_KEY_F8:excavadora.giro_pala-=1;
-                if (excavadora.giro_pala < excavadora.giro_pala_min)
-                    excavadora.giro_pala = excavadora.giro_pala_min;break;
+        case GLUT_KEY_F1: coche.giro_ruedas_delanteras+=5;
+                if (coche.giro_ruedas_delanteras > coche.GIRO_MAXIMO_RUEDAS)
+                    coche.giro_ruedas_delanteras=coche.GIRO_MAXIMO_RUEDAS;break;
+        case GLUT_KEY_F2: coche.giro_ruedas_delanteras-=5;
+                if (coche.giro_ruedas_delanteras < -coche.GIRO_MAXIMO_RUEDAS)
+                    coche.giro_ruedas_delanteras=-coche.GIRO_MAXIMO_RUEDAS;break;
+        case GLUT_KEY_F3: coche.giro_ruedas-=5; break;
+    
+
+
+        case GLUT_KEY_F4:coche.giro_puerta1+=5;
+                if (coche.giro_puerta1 > coche.GIRO_MAXIMO_PUERTAS)
+                    coche.giro_puerta1 = coche.GIRO_MAXIMO_PUERTAS;break;
+        case GLUT_KEY_F5:coche.giro_puerta1-=5;
+                if (coche.giro_puerta1 < 0)
+                    coche.giro_puerta1 = 0 ;break;
+        case GLUT_KEY_F6:coche.giro_puerta2-=5;
+                if (coche.giro_puerta2 < -coche.GIRO_MAXIMO_PUERTAS)
+                    coche.giro_puerta2 = -coche.GIRO_MAXIMO_PUERTAS;break;
+        case GLUT_KEY_F7:coche.giro_puerta2+=5;
+                if (coche.giro_puerta2 > 0)
+                    coche.giro_puerta2 = 0 ;break;
+        case GLUT_KEY_F8:coche.giro_puerta3+=5;
+                if (coche.giro_puerta3 > coche.GIRO_MAXIMO_PUERTAS)
+                    coche.giro_puerta3 = coche.GIRO_MAXIMO_PUERTAS;break;
+        case GLUT_KEY_F9:coche.giro_puerta3-=5;
+                if (coche.giro_puerta3 < 0)
+                    coche.giro_puerta3 = 0 ;break;
     }
     glutPostRedisplay();
 }

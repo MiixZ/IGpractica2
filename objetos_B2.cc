@@ -756,10 +756,11 @@ void _excavadora::draw(_modo modo, float r, float g, float b, float grosor)
 /////////////////////////////////////////////////////////////////
 
 _coche::_coche(){
-    giro_puerta1 = 1.0;
-    giro_puerta2 = 1.0;
-    giro_puerta3 = 1.0;
-    giro_puerta4 = 1.0;
+    giro_puerta1 = 0;
+    giro_puerta2 = 0;
+    giro_puerta3 = 0;
+    giro_ruedas = 0;
+    giro_ruedas_delanteras = 0;
 }
 
 _ruedas::_ruedas(){
@@ -776,11 +777,13 @@ _sustentacioncoche::_sustentacioncoche(){
     radio = 2;
 }
 
-void _ruedas::draw(_modo modo, float r, float g, float b, float grosor){
+void _ruedas::draw(_modo modo, float r, float g, float b, float grosor, float giro_ruedas, float giro_ruedas_delanteras){
     
     glPushMatrix();                                         // Rueda alante izquierda. (Rueda)
     glTranslatef(2*ancho/5,0,fondo/2);                  // Posición    
     glRotatef(90,1,0,0);
+    glRotatef(giro_ruedas_delanteras,0,0,1);
+    glRotatef(giro_ruedas,0,1,0);
     glScalef(radio, fondo/2.2, radio);                      // Tamaño
     rueda1.draw(modo, r, g, b, grosor);
     glPopMatrix();
@@ -788,6 +791,7 @@ void _ruedas::draw(_modo modo, float r, float g, float b, float grosor){
     glPushMatrix();                                         // Rueda atrás derecha. (Rueda)
     glTranslatef(-2*ancho/5,0,fondo/2 + 0.6);
     glRotatef(90,1,0,0);
+    glRotatef(giro_ruedas,0,1,0);
     glScalef(radio, fondo/2.2, radio);
     rueda2.draw(modo, r, g, b, grosor);
     glPopMatrix();
@@ -795,6 +799,8 @@ void _ruedas::draw(_modo modo, float r, float g, float b, float grosor){
     glPushMatrix();                                         // Rueda alante derecha. (Rueda)
     glTranslatef(2*ancho/5,0,-fondo/2);                 // Posición    
     glRotatef(90,1,0,0);
+    glRotatef(giro_ruedas_delanteras,0,0,1);
+    glRotatef(giro_ruedas,0,1,0);
     glScalef(radio, fondo/2.2, radio);                      // Tamaño
     rueda3.draw(modo, r, g, b, grosor);
     glPopMatrix();
@@ -802,6 +808,7 @@ void _ruedas::draw(_modo modo, float r, float g, float b, float grosor){
     glPushMatrix();                                         // Rueda atrás izquierda. (Rueda)
     glTranslatef(-2*ancho/5,0,-fondo/2 - 0.6);
     glRotatef(90,1,0,0);
+    glRotatef(giro_ruedas,0,1,0);
     glScalef(radio, fondo/2.2, radio);
     rueda4.draw(modo, r, g, b, grosor);
     glPopMatrix();
@@ -840,7 +847,8 @@ void _ruedas::draw(_modo modo, float r, float g, float b, float grosor){
 
 }
 
-void _sustentacioncoche::draw(_modo modo, float r, float g, float b, float grosor){
+void _sustentacioncoche::draw(_modo modo, float r, float g, float b, float grosor,
+                              float giro_puerta1, float giro_puerta2, float giro_puerta3){
     
 //CABINA
 
@@ -898,19 +906,22 @@ void _sustentacioncoche::draw(_modo modo, float r, float g, float b, float groso
 
     glPushMatrix();                                         // Puerta derecha
     glTranslatef(ancho/7 - 0.6,alto/6, fondo - 0.4);
+    glRotatef(giro_puerta1, 1, 0, 0);
     glScalef(ancho/4, alto - 0.6, 0.05);
     base.draw(modo, r, g, b, grosor);
     glPopMatrix();
 
     glPushMatrix();                                         // Puerta izquierda
     glTranslatef(ancho/7 - 0.6,alto/6, -fondo + 0.4);
+    glRotatef(giro_puerta2, 1, 0, 0);
     glScalef(ancho/4, alto - 0.6, 0.05);
     base.draw(modo, r, g, b, grosor);
     glPopMatrix();
 
     glPushMatrix();                                         // Puerta izquierda
     glTranslatef(-ancho + 0.6,alto/6, 0);
-    glScalef(0.05, alto - 0.6, fondo/2);
+    glRotatef(giro_puerta3, 0, 0, 1);
+    glScalef(0.05, alto - 0.6, fondo/1.5);
     base.draw(modo, r, g, b, grosor);
     glPopMatrix();
 
@@ -920,11 +931,9 @@ void _coche::draw(_modo modo, float r, float g, float b, float grosor){
 
     glPushMatrix();
     
-    sustentacion.draw(modo, r, g, b, grosor);
+    sustentacion.draw(modo, r, g, b, grosor, giro_puerta1, giro_puerta2, giro_puerta3);
 
-    glRotatef(giro_puerta1,0,0,1);
-
-    ruedas.draw(modo, r, g, b, grosor);
+    ruedas.draw(modo, r, g, b, grosor, giro_ruedas, giro_ruedas_delanteras);
 
     glPopMatrix();
 }

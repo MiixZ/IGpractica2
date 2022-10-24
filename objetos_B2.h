@@ -296,7 +296,7 @@ public:
 
     float radio;
 
-    void draw(_modo modo, float r, float g, float b, float grosor);
+    void draw(_modo modo, float r, float g, float b, float grosor, float giros_ruedas, float giro_ruedas_delanteras);
 
 protected:
     _cilindro rueda1, rueda2, rueda3, rueda4;
@@ -305,7 +305,8 @@ protected:
 class _sustentacioncoche: public _triangulos3D {
 public:
     _sustentacioncoche();
-    void  draw(_modo modo, float r, float g, float b, float grosor);
+    void  draw(_modo modo, float r, float g, float b, float grosor,
+              float giro_puerta1, float giro_puerta2, float giro_puerta3);
     
     float ancho;
     float alto;
@@ -332,9 +333,11 @@ public:
     float giro_puerta1;
     float giro_puerta2;
     float giro_puerta3;
-    float giro_puerta4;
-    
-    float GIRO_MAXIMO_PUERTAS = 90;
+    float giro_ruedas_delanteras;
+    float giro_ruedas;
+
+    float GIRO_MAXIMO_RUEDAS = 45;
+    float GIRO_MAXIMO_PUERTAS = 135;
     
 protected:
     _sustentacioncoche sustentacion;
