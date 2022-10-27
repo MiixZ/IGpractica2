@@ -220,8 +220,8 @@ switch (Tecla1){
         case GLUT_KEY_RIGHT:Observer_angle_y++;break;
         case GLUT_KEY_UP:Observer_angle_x--;break;
         case GLUT_KEY_DOWN:Observer_angle_x++;break;
-        case GLUT_KEY_F10:Observer_distance*=1.2;break;             // Cambiado por teclado.
-        case GLUT_KEY_F11:Observer_distance/=1.2;break;
+        case GLUT_KEY_PAGE_UP:Observer_distance*=1.2;break;             // Cambiado por teclado.
+        case GLUT_KEY_PAGE_DOWN:Observer_distance/=1.2;break;
             
         case GLUT_KEY_F1: coche.giro_ruedas_delanteras+=5;
                 if (coche.giro_ruedas_delanteras > coche.GIRO_MAXIMO_RUEDAS)
@@ -231,8 +231,6 @@ switch (Tecla1){
                     coche.giro_ruedas_delanteras=-coche.GIRO_MAXIMO_RUEDAS;break;
         case GLUT_KEY_F3: coche.giro_ruedas-=5; break;
     
-
-
         case GLUT_KEY_F4:coche.giro_puerta1+=5;
                 if (coche.giro_puerta1 > coche.GIRO_MAXIMO_PUERTAS)
                     coche.giro_puerta1 = coche.GIRO_MAXIMO_PUERTAS;break;
@@ -251,6 +249,12 @@ switch (Tecla1){
         case GLUT_KEY_F9:coche.giro_puerta3-=5;
                 if (coche.giro_puerta3 < 0)
                     coche.giro_puerta3 = 0 ;break;
+        case GLUT_KEY_F10:coche.giro_antena+=5;
+                if (coche.giro_antena > coche.GIRO_MAXIMO_ANTENA)
+                    coche.giro_antena = coche.GIRO_MAXIMO_ANTENA;break;
+        case GLUT_KEY_F11:coche.giro_antena-=5;
+                if (coche.giro_antena < -coche.GIRO_MAXIMO_ANTENA)
+                    coche.giro_antena = -coche.GIRO_MAXIMO_ANTENA;break;
     }
     glutPostRedisplay();
 }

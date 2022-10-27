@@ -245,47 +245,6 @@ protected:
     _sustentacion sustentacion;
 };
 
-
-class _capo: public _triangulos3D {
-public:
-    _capo();
-    void  draw(_modo modo, float r, float g, float b, float grosor);
-
-    float ancho;
-    float alto;
-    float fondo;
-
-protected:
-    _cubo cubo;
-};
-
-class _cabinacoche: public _triangulos3D
-{
-public:
-    _cabinacoche();
-    void  draw(_modo modo, float r, float g, float b, float grosor);
-
-    float ancho;
-    float alto;
-    float fondo;
-
-protected:
-    _cubo cubo;
-};
-
-class _puerta: public _triangulos3D{
-public:
-    _puerta();
-    void  draw(_modo modo, float r, float g, float b, float grosor);
-
-    float ancho;
-    float alto;
-    float fondo;
-
-protected:
-    _cubo cubo;
-};
-
 class _ruedas: public _triangulos3D{
 public:
     _ruedas();
@@ -296,32 +255,26 @@ public:
 
     float radio;
 
-    void draw(_modo modo, float r, float g, float b, float grosor, float giros_ruedas, float giro_ruedas_delanteras);
+    void draw(_modo modo, float r, float g, float b, float grosor,
+     float giros_ruedas, float giro_ruedas_delanteras, float giro_antena);
 
 protected:
-    _cilindro rueda1, rueda2, rueda3, rueda4;
+    _cilindro rueda1, rueda2, rueda3, rueda4, techo;
 };
 
 class _sustentacioncoche: public _triangulos3D {
 public:
     _sustentacioncoche();
     void  draw(_modo modo, float r, float g, float b, float grosor,
-              float giro_puerta1, float giro_puerta2, float giro_puerta3);
+                float giro_puerta1, float giro_puerta2, float giro_puerta3);
     
     float ancho;
     float alto;
     float fondo;
-
     float radio;
-    
-    float getAncho();
-    float getAlto();
-    float getfondo();
-    float getRadio();
 
 protected:
     _cubo base;
-    // _cilindro techo1, techo2;
 };
 
 class _coche: public _triangulos3D {
@@ -335,9 +288,11 @@ public:
     float giro_puerta3;
     float giro_ruedas_delanteras;
     float giro_ruedas;
+    float giro_antena;
 
     float GIRO_MAXIMO_RUEDAS = 45;
     float GIRO_MAXIMO_PUERTAS = 135;
+    float GIRO_MAXIMO_ANTENA = 30;
     
 protected:
     _sustentacioncoche sustentacion;
