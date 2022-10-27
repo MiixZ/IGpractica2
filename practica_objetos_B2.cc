@@ -255,6 +255,13 @@ switch (Tecla1){
         case GLUT_KEY_F11:coche.giro_antena-=5;
                 if (coche.giro_antena < -coche.GIRO_MAXIMO_ANTENA)
                     coche.giro_antena = -coche.GIRO_MAXIMO_ANTENA;break;
+
+        case GLUT_KEY_F12:
+            if(coche.luz_encendida)
+                coche.luz_encendida = false;
+            else
+                coche.luz_encendida = true;       
+            break;
     }
     glutPostRedisplay();
 }
