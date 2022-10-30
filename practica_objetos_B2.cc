@@ -198,6 +198,13 @@ void normal_key(unsigned char Tecla1,int x,int y)
         case 'L':t_objeto=ROTACION_PLY;break;
         case 'A':t_objeto=EXCAVADORA;break;
         case 'K':t_objeto=COCHE;break;
+        
+        case 'S':
+            if(coche.anima == true)
+                coche.anima = false;
+            else
+                coche.anima = true;
+            break;
 	}
     glutPostRedisplay();
 }
@@ -212,6 +219,37 @@ void normal_key(unsigned char Tecla1,int x,int y)
 
 //***************************************************************************
 
+void animacioncoche(){
+    if(coche.anima){
+        int velocidad = 1;
+
+        coche.giro_ruedas -= velocidad;
+
+        coche.giro_antena += velocidad;
+
+        if(coche.giro_antena >= coche.GIRO_MAXIMO_ANTENA)
+            coche.giro_antena = coche.GIRO_MAXIMO_ANTENA;
+        
+        if(coche.der and coche.time > 400 and coche.time < 1000){
+            coche.giro_ruedas_delanteras += velocidad;
+            if(coche.giro_ruedas_delanteras >= coche.GIRO_MAXIMO_RUEDAS){
+                coche.giro_ruedas_delanteras = coche.GIRO_MAXIMO_RUEDAS;
+                coche.der = false;
+            }
+        }
+        else if(coche.time > 1500){
+            coche.giro_ruedas_delanteras -= velocidad;
+            if(coche.giro_ruedas_delanteras <= -coche.GIRO_MAXIMO_RUEDAS){
+                coche.giro_ruedas_delanteras = -coche.GIRO_MAXIMO_RUEDAS;
+                coche.der = true;
+                coche.time = 0;
+            }
+        }
+    }
+    coche.time++;
+    glutPostRedisplay();
+}
+
 void special_key(int Tecla1,int x,int y)
 {
 
@@ -220,7 +258,7 @@ switch (Tecla1){
         case GLUT_KEY_RIGHT:Observer_angle_y++;break;
         case GLUT_KEY_UP:Observer_angle_x--;break;
         case GLUT_KEY_DOWN:Observer_angle_x++;break;
-        case GLUT_KEY_PAGE_UP:Observer_distance*=1.2;break;             // Cambiado por teclado.
+        case GLUT_KEY_PAGE_UP:Observer_distance*=1.2;break;             
         case GLUT_KEY_PAGE_DOWN:Observer_distance/=1.2;break;
             
         case GLUT_KEY_F1: coche.giro_ruedas_delanteras+=5;
@@ -371,6 +409,9 @@ int main(int argc, char *argv[] )
 
     // funcion de inicialización
     initialize();
+
+
+    glutIdleFunc(animacioncoche);
 
     // creación del objeto ply
     ply.parametros(argv[1]);

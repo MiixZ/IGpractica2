@@ -763,6 +763,9 @@ _coche::_coche(){
     giro_ruedas_delanteras = 0;
     giro_antena = 0;
     luz_encendida = false;
+    anima = false;
+    der = true;
+    time = 0;
 }
 
 _ruedas::_ruedas(){

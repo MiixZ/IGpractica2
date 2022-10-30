@@ -291,6 +291,8 @@ public:
     float giro_ruedas;
     float giro_antena;
     bool luz_encendida;
+    bool anima, der;
+    int time;
 
     float GIRO_MAXIMO_RUEDAS = 45;
     float GIRO_MAXIMO_PUERTAS = 135;
